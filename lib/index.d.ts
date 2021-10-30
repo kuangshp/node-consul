@@ -1,10 +1,11 @@
-interface ICheckConfig {
+export declare const computerIPAddress: () => string | undefined;
+export interface ICheckConfig {
     HTTP: string;
     Timeout: string;
     Interval: string;
     DeregisterCriticalServiceAfter: string;
 }
-interface IService {
+export interface IService {
     ID: string;
     Service: string;
     Tags: string[];
@@ -17,10 +18,10 @@ interface IService {
     EnableTagOverride: boolean;
     Datacenter: string;
 }
-export declare class NodeConsul {
+export default class NodeConsul {
     private consulAddress;
     private currentAddress;
-    constants(consulAddress: string): void;
+    constructor(consulAddress: string);
     /**
      * @Author: 水痕
      * @Date: 2021-10-30 15:04:59
@@ -61,4 +62,3 @@ export declare class NodeConsul {
      */
     findService(serviceId: string): Promise<Record<string, IService>>;
 }
-export {};

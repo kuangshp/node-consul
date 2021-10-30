@@ -2,14 +2,16 @@ import axios from 'axios';
 import { ALL_SERVICE_URL, DEREGISTER_URL, REGISTER_URL, SERVICE_ID_URL } from './constants';
 import { getIPAddress } from './utils';
 
-interface ICheckConfig {
+export const computerIPAddress = () => getIPAddress();
+
+export interface ICheckConfig {
   HTTP: string;
   Timeout: string;
   Interval: string;
   DeregisterCriticalServiceAfter: string;
 }
 
-interface IService {
+export interface IService {
   ID: string;
   Service: string;
   Tags: string[];
@@ -23,11 +25,11 @@ interface IService {
   Datacenter: string;
 }
 
-export class NodeConsul {
+export default class NodeConsul {
   private consulAddress: string | undefined;
   private currentAddress: string | undefined;
 
-  constants(consulAddress: string) {
+  constructor(consulAddress: string) {
     this.consulAddress = consulAddress;
     this.currentAddress = getIPAddress();
   }
@@ -86,7 +88,8 @@ export class NodeConsul {
    */
   async serviceList(): Promise<Record<string, IService>> {
     const url: string = `http://${this.consulAddress}${ALL_SERVICE_URL}`;
-    return await axios.get(url);
+    const response = await axios.get(url);
+    return response.data;
   }
 
   /**
@@ -99,6 +102,7 @@ export class NodeConsul {
    */
   async findService(serviceId: string): Promise<Record<string, IService>> {
     const url: string = `http://${this.consulAddress}${SERVICE_ID_URL}/${serviceId}`;
-    return await axios.get(url);
+    const response = await axios.get(url);
+    return response.data;
   }
 }
