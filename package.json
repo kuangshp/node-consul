@@ -1,0 +1,29 @@
+{
+  "name": "node-consul",
+  "version": "0.0.1",
+  "description": "node版实现consul服务发现",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [
+    "node",
+    "consul",
+    "node-consul",
+    "typescript"
+  ],
+  "homepage": "https://github.com/kuangshp/node-consul",
+  "author": "kuangshp@126.com",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "crypto": "^1.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^12.6.8",
+    "editorconfig": "^0.15.3"
+  },
+  "files": [
+    "lib/**/*"
+  ]
+}
